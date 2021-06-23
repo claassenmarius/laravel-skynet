@@ -1,0 +1,60 @@
+{
+    "name": "claassenmarius/laravel-skynet",
+    "description": "A laravel package to use the Skynet Courier API",
+    "keywords": [
+        "claassenmarius",
+        "skynet",
+        "laravel",
+        "laravel-skynet"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Claassenmarius\\LaravelSkynet\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Claassenmarius\\LaravelSkynet\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Claassenmarius\\LaravelSkynet\\SkynetServiceProvider"
+            ],
+            "aliases": {
+                "Skynet": "Claassenmarius\\LaravelSkynet\\Facades\\Skynet"
+            }
+        }
+    },
+    "authors": [
+        {
+            "name": "Marius Claassen",
+            "email": "marius.claassen@outlook.com",
+            "role": "Software Engineer"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "illuminate/contracts": "^8.37"
+    },
+    "require-dev": {
+        "brianium/paratest": "^6.2",
+        "nunomaduro/collision": "^5.3",
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.5",
+        "vimeo/psalm": "^4.4"
+    },
+    "scripts": {
+        "psalm": "vendor/bin/psalm",
+        "test": "./vendor/bin/testbench package:test --parallel --no-coverage",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
