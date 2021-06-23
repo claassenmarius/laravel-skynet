@@ -32,8 +32,7 @@ class SkynetServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        if($this->app->runningInConsole()) {
-
+        if ($this->app->runningInConsole()) {
             $this->publishes([
                 __DIR__.'/../config/config.php' => config_path('skynet.php'),
             ], 'config');
