@@ -3,7 +3,6 @@
 
 namespace Claassenmarius\LaravelSkynet\Facades;
 
-
 use Illuminate\Support\Facades\Facade;
 
 class Skynet extends Facade

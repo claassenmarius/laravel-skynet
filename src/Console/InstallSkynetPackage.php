@@ -3,7 +3,6 @@
 
 namespace Claassenmarius\LaravelSkynet\Console;
 
-
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 
@@ -50,7 +49,7 @@ class InstallSkynetPackage extends Command
     {
         $params = [
             '--provider' => "Claassenmarius\Skynet\SkynetServiceProvider",
-            '--tag' => "config"
+            '--tag' => "config",
         ];
 
         if ($forcePublish === true) {

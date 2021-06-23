@@ -3,8 +3,6 @@
 
 namespace Claassenmarius\LaravelSkynet\Tests;
 
-
-
 class ExampleTest extends TestCase
 {
     /** @test */

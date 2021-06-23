@@ -3,7 +3,6 @@
 
 namespace Claassenmarius\LaravelSkynet;
 
-
 use Illuminate\Support\Facades\Http;
 
 class Skynet
@@ -13,13 +12,12 @@ class Skynet
     private string $systemId;
     private string $accountNumber;
 
-    public function __construct (
+    public function __construct(
         string $username,
         string $password,
         string $systemId,
         string $accountNumber
-    )
-    {
+    ) {
         $this->username = $username;
         $this->password = $password;
         $this->systemId = $systemId;
@@ -32,7 +30,7 @@ class Skynet
             'Username' => $this->username,
             'Password' => $this->password,
             'SystemId' => $this->systemId,
-            'AccountNumber' => $this->accountNumber
+            'AccountNumber' => $this->accountNumber,
         ])->json('SecurityToken');
     }
 
@@ -40,7 +38,7 @@ class Skynet
     {
         return Http::post('https://api.skynet.co.za:3227/api/Validation/ValidateSuburbPostalCode', [
             'suburb' => $location['suburb'],
-            'postalCode' => $location['postal-code']
+            'postalCode' => $location['postal-code'],
         ]);
     }
 
@@ -48,7 +46,7 @@ class Skynet
     {
         return Http::post('https://api.skynet.co.za:3227/api/Validation/GetPostalCode/', [
             'securityToken' => $this->getSecurityToken(),
-            'suburbName' => $suburb
+            'suburbName' => $suburb,
         ]);
     }
 
@@ -63,13 +61,13 @@ class Skynet
             'InsuranceType' => $parcelData['insurance-type'],
             'InsuranceAmount' => $parcelData['parcel-insurance'],
             'DestinationPCode' => $parcelData['deliver-postcode'],
-            'ParcelList' => array([
+            'ParcelList' => [[
                 'parcel_number' => "1",
                 'parcel_length' => $parcelData['parcel-length'],
                 'parcel_breadth' => $parcelData['parcel-width'],
                 'parcel_height' => $parcelData['parcel-height'],
-                'parcel_mass' => $parcelData['parcel-weight']
-            ])
+                'parcel_mass' => $parcelData['parcel-weight'],
+            ]],
         ]);
     }
 
@@ -82,7 +80,7 @@ class Skynet
             'FromPostCode' => $locations['from-postcode'],
             'ToSuburb' => $locations['to-suburb'],
             'ToPostCode' => $locations['to-postcode'],
-            'ServiceType' => $locations['service-type']
+            'ServiceType' => $locations['service-type'],
         ]);
     }
 
@@ -136,16 +134,16 @@ class Skynet
             "InsuranceType" => $waybillData['insurance-type'] ?? '1',
             "InsuranceAmount" => $waybillData['insurance-amount'] ?? '0',
             "Security" => $waybillData['security'] ?? 'N',
-            "ParcelList" => array(
+            "ParcelList" => [
                 "parcel_number" => "1",
                 "parcel_length" => $waybillData['parcel-length'],
                 "parcel_breadth" => $waybillData['parcel-width'],
                 "parcel_height" => $waybillData['parcel-height'] ,
                 "parcel_mass" => $waybillData['parcel-weight'],
                 "parcel_description" => $waybillData['parcel-description'] ?? null,
-                "parcel_reference" => $waybillData['parcel-reference']
-            ),
-            "OffSiteCollection" => $waybillData['offsite-collection']  ?? false
+                "parcel_reference" => $waybillData['parcel-reference'],
+            ],
+            "OffSiteCollection" => $waybillData['offsite-collection'] ?? false,
         ]);
     }
 
@@ -153,18 +151,14 @@ class Skynet
     {
         return Http::post('https://api.skynet.co.za:3227/api/Waybill/GetWaybillPOD', [
             'SecurityToken' => $this->getSecurityToken(),
-            'WaybillNumber' => $waybillNumber
+            'WaybillNumber' => $waybillNumber,
         ]);
     }
 
     public function trackWaybill(string $waybillNumber)
     {
         return Http::post('https://api.skynet.co.za:3227/api/waybill/GetWaybillTracking', [
-            'WaybillReference' => $waybillNumber
+            'WaybillReference' => $waybillNumber,
         ]);
     }
-
-
-
-
 }
