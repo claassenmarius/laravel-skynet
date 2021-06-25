@@ -62,13 +62,13 @@ class Skynet
             'InsuranceType' => $parcelData['insurance-type'],
             'InsuranceAmount' => $parcelData['parcel-insurance'],
             'DestinationPCode' => $parcelData['deliver-postcode'],
-            'ParcelList' => array([
+            'ParcelList' => [[
                 'parcel_number' => "1",
                 'parcel_length' => $parcelData['parcel-length'],
                 'parcel_breadth' => $parcelData['parcel-width'],
                 'parcel_height' => $parcelData['parcel-height'],
                 'parcel_mass' => $parcelData['parcel-weight'],
-            ]),
+            ]],
         ]);
     }
 
@@ -135,7 +135,7 @@ class Skynet
             "InsuranceType" => $waybillData['insurance-type'] ?? '1',
             "InsuranceAmount" => $waybillData['insurance-amount'] ?? '0',
             "Security" => $waybillData['security'] ?? 'N',
-            "ParcelList" => array([
+            "ParcelList" => [[
                 "parcel_number" => "1",
                 "parcel_length" => $waybillData['parcel-length'],
                 "parcel_breadth" => $waybillData['parcel-width'],
@@ -143,7 +143,7 @@ class Skynet
                 "parcel_mass" => $waybillData['parcel-weight'],
                 "parcel_description" => $waybillData['parcel-description'] ?? null,
                 "parcel_reference" => $waybillData['parcel-reference'],
-            ]),
+            ]],
             "OffSiteCollection" => $waybillData['offsite-collection'] ?? false,
         ]);
     }

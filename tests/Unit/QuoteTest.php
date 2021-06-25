@@ -3,7 +3,6 @@
 
 namespace Claassenmarius\LaravelSkynet\Tests\Unit;
 
-
 use Claassenmarius\LaravelSkynet\Models\Quote;
 use Claassenmarius\LaravelSkynet\Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -25,7 +24,6 @@ class QuoteTest extends TestCase
         $this->assertDatabaseCount('quotes', 3);
     }
 
-
     /** @test */
     public function verify_quote_details_when_created()
     {
@@ -35,7 +33,7 @@ class QuoteTest extends TestCase
             'error_code' => '0',
             'error_description' => 'Success',
             'paid' => true,
-            'cancelled' => false
+            'cancelled' => false,
         ]);
 
         $this->assertEquals('100.00', $quote->total_charge);

@@ -25,7 +25,6 @@ class TestCase extends \Orchestra\Testbench\TestCase
 
     protected function defineEnvironment($app)
     {
-
         $app->config->set('database.default', 'mysql');
         $app->config->set('database.connections.msql.database', 'forge');
         $app->config->set('database.connections.mysql.username', 'root');
