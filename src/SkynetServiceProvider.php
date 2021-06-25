@@ -10,7 +10,7 @@ class SkynetServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->app->bind(Skynet::class, function ($app) {
+        $this->app->bind(Skynet::class, function () {
             return new Skynet(
                 config('skynet.account_username'),
                 config('skynet.account_password'),
@@ -19,7 +19,7 @@ class SkynetServiceProvider extends ServiceProvider
             );
         });
 
-        $this->app->bind('skynet', function ($app) {
+        $this->app->bind('skynet', function () {
             return new Skynet(
                 config('skynet.account_username'),
                 config('skynet.account_password'),
