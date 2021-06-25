@@ -2,6 +2,7 @@
 
 
 namespace Claassenmarius\LaravelSkynet;
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 
@@ -35,7 +36,6 @@ class SkynetServiceProvider extends ServiceProvider
 
     public function boot()
     {
-
         if ($this->app->runningInConsole()) {
 
             // Allow user to publish the package's config file to their laravel app
@@ -44,11 +44,10 @@ class SkynetServiceProvider extends ServiceProvider
             ], 'config');
 
             // Allow the user to publish the package's migrations to their laravel app
-            if(! class_exists(\CreateQuotesTable::class)) {
+            if (! class_exists(\CreateQuotesTable::class)) {
                 $this->publishes([
-                    __DIR__.'/../database/migrations/create_quotes_table.php.stub' =>database_path('migrations/' . date('Y_m_d_His', time()) . '_create_quotes_table.php')
+                    __DIR__.'/../database/migrations/create_quotes_table.php.stub' => database_path('migrations/' . date('Y_m_d_His', time()) . '_create_quotes_table.php'),
                 ], 'migrations');
-
             }
         }
 
@@ -66,7 +65,7 @@ class SkynetServiceProvider extends ServiceProvider
     {
         return [
             'prefix' => config('skynet.prefix'),
-            'middleware' => config('skynet.middleware')
+            'middleware' => config('skynet.middleware'),
         ];
     }
 }

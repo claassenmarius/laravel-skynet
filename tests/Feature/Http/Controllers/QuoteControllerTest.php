@@ -3,7 +3,6 @@
 
 namespace Claassenmarius\LaravelSkynet\Tests\Feature\Http\Controllers;
 
-
 use Claassenmarius\LaravelSkynet\Tests\TestCase;
 
 class QuoteControllerTest extends TestCase
