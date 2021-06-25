@@ -1,7 +1,7 @@
 # Laravel Skynet
 
-[![Tests](https://github.com/claassenmarius/php-skynet/actions/workflows/run-tests.yml/badge.svg)](https://github.com/claassenmarius/php-skynet/actions/workflows/run-tests.yml)
-[![Check & fix styling](https://github.com/claassenmarius/php-skynet/actions/workflows/php-cs-fixer.yml/badge.svg)](https://github.com/claassenmarius/php-skynet/actions/workflows/php-cs-fixer.yml)
+[![Tests](https://github.com/claassenmarius/laravel-skynet/actions/workflows/run-tests.yml/badge.svg)](https://github.com/claassenmarius/laravel-skynet/actions/workflows/run-tests.yml)
+[![Check & fix styling](https://github.com/claassenmarius/laravel-skynet/actions/workflows/php-cs-fixer.yml/badge.svg)](https://github.com/claassenmarius/laravel-skynet/actions/workflows/php-cs-fixer.yml)
 
 
 
