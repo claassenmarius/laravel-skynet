@@ -3,6 +3,7 @@
 
 namespace Claassenmarius\LaravelSkynet;
 
+use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
 class Skynet
@@ -24,17 +25,17 @@ class Skynet
         $this->accountNumber = $accountNumber;
     }
 
-    private function securityToken(): string
+    public function securityToken(): Response
     {
         return Http::post('https://api.skynet.co.za:3227/api/Security/GetSecurityToken', [
             'Username' => $this->username,
             'Password' => $this->password,
             'SystemId' => $this->systemId,
             'AccountNumber' => $this->accountNumber,
-        ])->json('SecurityToken');
+        ]);
     }
 
-    public function validateSuburbAndPostalCode(array $location)
+    public function validateSuburbAndPostalCode(array $location): Response
     {
         return Http::post('https://api.skynet.co.za:3227/api/Validation/ValidateSuburbPostalCode', [
             'suburb' => $location['suburb'],
@@ -42,18 +43,18 @@ class Skynet
         ]);
     }
 
-    public function postalCodesFromSuburb(string $suburb)
+    public function postalCodesFromSuburb(string $suburb): Response
     {
         return Http::post('https://api.skynet.co.za:3227/api/Validation/GetPostalCode/', [
-            'securityToken' => $this->getSecurityToken(),
+            'securityToken' => ($this->securityToken())->json('SecurityToken'),
             'suburbName' => $suburb,
         ]);
     }
 
-    public function quote(array $parcelData)
+    public function quote(array $parcelData): Response
     {
         return Http::post('https://api.skynet.co.za:3227/api/Financial/GetQuote', [
-            'SecurityToken' => $this->getSecurityToken(),
+            'SecurityToken' => $this->securityToken()->json('SecurityToken'),
             'AccountNumber' => $this->accountNumber,
             'FromCity' => $parcelData['collect-city'],
             'ToCity' => $parcelData['deliver-city'],
@@ -61,20 +62,20 @@ class Skynet
             'InsuranceType' => $parcelData['insurance-type'],
             'InsuranceAmount' => $parcelData['parcel-insurance'],
             'DestinationPCode' => $parcelData['deliver-postcode'],
-            'ParcelList' => [[
+            'ParcelList' => array([
                 'parcel_number' => "1",
                 'parcel_length' => $parcelData['parcel-length'],
                 'parcel_breadth' => $parcelData['parcel-width'],
                 'parcel_height' => $parcelData['parcel-height'],
                 'parcel_mass' => $parcelData['parcel-weight'],
-            ]],
+            ]),
         ]);
     }
 
-    public function deliveryETA(array $locations)
+    public function deliveryETA(array $locations): Response
     {
         return Http::post('https://api.skynet.co.za:3227/api/Waybill/GetWaybillETA', [
-            'SecurityToken' => $this->getSecurityToken(),
+            'SecurityToken' => $this->securityToken()->json('SecurityToken'),
             'AccountNumber' => $this->accountNumber,
             'FromSuburb' => $locations['from-suburb'],
             'FromPostCode' => $locations['from-postcode'],
@@ -84,10 +85,10 @@ class Skynet
         ]);
     }
 
-    public function createWaybill(array $waybillData)
+    public function createWaybill(array $waybillData): Response
     {
         return Http::post('https://api.skynet.co.za:3227/api/waybill/CreateWaybill', [
-            "SecurityToken" => $this->getSecurityToken(),
+            "SecurityToken" => $this->securityToken()->json('SecurityToken'),
             "AccountNumber" => $this->accountNumber,
             "CompanyName" => $waybillData['company-name'] ?? null,
             "CustomerReference" => $waybillData['customer-reference'],
@@ -134,7 +135,7 @@ class Skynet
             "InsuranceType" => $waybillData['insurance-type'] ?? '1',
             "InsuranceAmount" => $waybillData['insurance-amount'] ?? '0',
             "Security" => $waybillData['security'] ?? 'N',
-            "ParcelList" => [
+            "ParcelList" => array([
                 "parcel_number" => "1",
                 "parcel_length" => $waybillData['parcel-length'],
                 "parcel_breadth" => $waybillData['parcel-width'],
@@ -142,22 +143,22 @@ class Skynet
                 "parcel_mass" => $waybillData['parcel-weight'],
                 "parcel_description" => $waybillData['parcel-description'] ?? null,
                 "parcel_reference" => $waybillData['parcel-reference'],
-            ],
+            ]),
             "OffSiteCollection" => $waybillData['offsite-collection'] ?? false,
         ]);
     }
 
-    public function waybillPOD(string $waybillNumber)
+    public function waybillPOD(string $waybillNumber): Response
     {
         return Http::post('https://api.skynet.co.za:3227/api/Waybill/GetWaybillPOD', [
-            'SecurityToken' => $this->getSecurityToken(),
+            'SecurityToken' => $this->securityToken()->json('SecurityToken'),
             'WaybillNumber' => $waybillNumber,
         ]);
     }
 
-    public function trackWaybill(string $waybillNumber)
+    public function trackWaybill(string $waybillNumber): Response
     {
-        return Http::post('https://api.skynet.co.za:3227/api/waybill/GetWaybillTracking', [
+        return Http::get('https://api.skynet.co.za:3227/api/waybill/GetWaybillTracking', [
             'WaybillReference' => $waybillNumber,
         ]);
     }
