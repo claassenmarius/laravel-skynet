@@ -4,7 +4,6 @@ namespace Claassenmarius\LaravelSkynet\Tests;
 
 use Claassenmarius\LaravelSkynet\SkynetServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Schema;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {

@@ -28,7 +28,7 @@ class SkynetTest extends TestCase
                     "{\"SecurityToken\":\"2_03ce4988-43db-45ea-9797-e69befff8d3f\"}",
                     200,
                     ['Content-Type' => 'application/json; charset=utf-8']
-                )
+                ),
             ]
         );
 
@@ -46,13 +46,13 @@ class SkynetTest extends TestCase
                     true,
                     200,
                     ['Content-Type' => 'application/json; charset=utf-8']
-                )
+                ),
             ]
         );
 
         $response = $this->skynet->validateSuburbAndPostalCode([
             'suburb' => 'Brackenfell',
-            'postal-code' => '7560'
+            'postal-code' => '7560',
         ]);
 
         $this->assertEquals(true, $response->body());
@@ -80,7 +80,7 @@ class SkynetTest extends TestCase
         Http::fake(
             ['https://api.skynet.co.za:3227/api/*' => Http::sequence()
                 ->push("{\"SecurityToken\":\"2_03ce4988-43db-45ea-9797-e69befff8d3f\"}", 200, ['Content-Type' => 'application/json; charset=utf-8'])
-                ->push($expectedResponse, 200, ['Content-Type' => 'application/json; charset=utf-8'])
+                ->push($expectedResponse, 200, ['Content-Type' => 'application/json; charset=utf-8']),
             ]
         );
 
@@ -101,7 +101,7 @@ class SkynetTest extends TestCase
         Http::fake(
             ['https://api.skynet.co.za:3227/api/*' => Http::sequence()
                 ->push("{\"SecurityToken\":\"2_03ce4988-43db-45ea-9797-e69befff8d3f\"}", 200, ['Content-Type' => 'application/json; charset=utf-8'])
-                ->push($expectedResponse, 200, ['Content-Type' => 'application/json; charset=utf-8'])
+                ->push($expectedResponse, 200, ['Content-Type' => 'application/json; charset=utf-8']),
             ]
         );
 
@@ -150,7 +150,7 @@ class SkynetTest extends TestCase
         Http::fake(
             ['https://api.skynet.co.za:3227/api/*' => Http::sequence()
                 ->push("{\"SecurityToken\":\"2_03ce4988-43db-45ea-9797-e69befff8d3f\"}", 200, ['Content-Type' => 'application/json; charset=utf-8'])
-                ->push($expectedResponse, 200, ['Content-Type' => 'application/json; charset=utf-8'])
+                ->push($expectedResponse, 200, ['Content-Type' => 'application/json; charset=utf-8']),
             ]
         );
 
@@ -178,7 +178,7 @@ class SkynetTest extends TestCase
         Http::fake(
             ['https://api.skynet.co.za:3227/api/*' => Http::sequence()
                 ->push("{\"SecurityToken\":\"2_03ce4988-43db-45ea-9797-e69befff8d3f\"}", 200, ['Content-Type' => 'application/json; charset=utf-8'])
-                ->push($expectedResponse, 200, ['Content-Type' => 'application/json; charset=utf-8'])
+                ->push($expectedResponse, 200, ['Content-Type' => 'application/json; charset=utf-8']),
             ]
         );
 
@@ -221,7 +221,7 @@ class SkynetTest extends TestCase
         Http::fake(
             ['https://api.skynet.co.za:3227/api/*' => Http::sequence()
                 ->push("{\"SecurityToken\":\"2_03ce4988-43db-45ea-9797-e69befff8d3f\"}", 200, ['Content-Type' => 'application/json; charset=utf-8'])
-                ->push($expectedResponse, 200, ['Content-Type' => 'application/json; charset=utf-8'])
+                ->push($expectedResponse, 200, ['Content-Type' => 'application/json; charset=utf-8']),
             ]
         );
 
@@ -231,8 +231,8 @@ class SkynetTest extends TestCase
     }
 
     /** @test */
-    public function it_can_return_tracking_information_for_a_waybill(){
-
+    public function it_can_return_tracking_information_for_a_waybill()
+    {
         $expectedResponse = '[
                                 {
                                     "WaybillNumber": "080900028413",
@@ -254,7 +254,7 @@ class SkynetTest extends TestCase
 
         Http::fake(
             ['https://api.skynet.co.za:3227/api/*' => Http::sequence()
-                ->push($expectedResponse, 200, ['Content-Type' => 'application/json; charset=utf-8'])
+                ->push($expectedResponse, 200, ['Content-Type' => 'application/json; charset=utf-8']),
             ]
         );
 
@@ -272,7 +272,7 @@ class SkynetTest extends TestCase
                     "{\"SecurityToken\":\"2_03ce4988-43db-45ea-9797-e69befff8d3f\"}",
                     500,
                     ['Content-Type' => 'application/json; charset=utf-8']
-                )
+                ),
             ]
         );
 
@@ -280,7 +280,7 @@ class SkynetTest extends TestCase
 
         $this->expectException(RequestException::class);
 
-        if($response->failed()) {
+        if ($response->failed()) {
             $response->throw();
         }
 
