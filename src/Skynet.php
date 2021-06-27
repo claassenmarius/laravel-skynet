@@ -109,13 +109,13 @@ class Skynet
         try {
             return Http::timeout(5)
                 ->retry(3)
-                ->post('https://api.skynet.co.za:3227/api/Financial/GetQuot', [
+                ->post('https://api.skynet.co.za:3227/api/Financial/GetQuote', [
                 'SecurityToken' => $this->securityToken()->json('SecurityToken'),
                 'AccountNumber' => $this->accountNumber,
                 'FromCity' => $parcelData['collect-city'],
                 'ToCity' => $parcelData['deliver-city'],
                 'ServiceType' => $parcelData['service-type'],
-                'InsuranceType' => $parcelData['insurance-type'],
+                'InsuranceType' => $parcelData['insurance-type'] ?? 1,
                 'InsuranceAmount' => $parcelData['parcel-insurance'],
                 'DestinationPCode' => $parcelData['deliver-postcode'],
                 'ParcelList' => [[
