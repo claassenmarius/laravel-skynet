@@ -3,6 +3,9 @@
 
 namespace Claassenmarius\LaravelSkynet;
 
+use Claassenmarius\LaravelSkynet\Exceptions\SkynetSecurityTokenException;
+use Illuminate\Http\Client\ConnectionException;
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Http;
 
@@ -27,12 +30,19 @@ class Skynet
 
     public function securityToken(): Response
     {
-        return Http::post('https://api.skynet.co.za:3227/api/Security/GetSecurityToken', [
-            'Username' => $this->username,
-            'Password' => $this->password,
-            'SystemId' => $this->systemId,
-            'AccountNumber' => $this->accountNumber,
-        ]);
+        try {
+            return Http::timeout(5)
+                ->retry(3)
+                ->post('https://api.skynet.co.za:3227/api/Security/GetSecurityToke', [
+                    'Username' => $this->username,
+                    'Password' => $this->password,
+                    'SystemId' => $this->systemId,
+                    'AccountNumber' => $this->accountNumber,
+                ]);
+        } catch (ConnectionException | RequestException $exception) {
+            throw new SkynetSecurityTokenException();
+        }
+
     }
 
     public function validateSuburbAndPostalCode(array $location): Response
