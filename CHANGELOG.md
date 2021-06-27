@@ -2,6 +2,13 @@
 
 All notable changes to `laravel-skynet` will be documented in this file.
 
+## 1.1.1 - 2021-06-27
+
+### Fixed
+
+- Fixed quote api endpoint
+- Add default value to insurance type on quote method
+
 ## 1.1.0 - 2021-06-27
 
 ### Added
