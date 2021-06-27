@@ -46,7 +46,7 @@ class Skynet
         try {
             return Http::timeout(5)
                 ->retry(3)
-                ->post('https://api.skynet.co.za:3227/api/Security/GetSecurityToken', [
+                ->post('https://api.skynet.co.za:3227/api/Security/GetSecurityToke', [
                     'Username' => $this->username,
                     'Password' => $this->password,
                     'SystemId' => $this->systemId,
