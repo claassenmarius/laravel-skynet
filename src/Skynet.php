@@ -7,8 +7,8 @@ use Claassenmarius\LaravelSkynet\Exceptions\SkynetCreateWaybillException;
 use Claassenmarius\LaravelSkynet\Exceptions\SkynetDeliveryEtaException;
 use Claassenmarius\LaravelSkynet\Exceptions\SkynetGetWaybillPodException;
 use Claassenmarius\LaravelSkynet\Exceptions\SkynetPostcodesFromSuburbException;
-use Claassenmarius\LaravelSkynet\Exceptions\SkynetSecurityTokenException;
 use Claassenmarius\LaravelSkynet\Exceptions\SkynetQuoteException;
+use Claassenmarius\LaravelSkynet\Exceptions\SkynetSecurityTokenException;
 use Claassenmarius\LaravelSkynet\Exceptions\SkynetTrackWaybillException;
 use Claassenmarius\LaravelSkynet\Exceptions\SkynetValidateSuburbPostcodeException;
 use Illuminate\Http\Client\ConnectionException;
@@ -55,7 +55,6 @@ class Skynet
         } catch (ConnectionException | RequestException $exception) {
             throw new SkynetSecurityTokenException();
         }
-
     }
 
     /**
@@ -127,10 +126,9 @@ class Skynet
                     'parcel_mass' => $parcelData['parcel-weight'],
                 ]],
             ]);
-        } catch(ConnectionException | RequestException | SkynetSecurityTokenException $exception) {
+        } catch (ConnectionException | RequestException | SkynetSecurityTokenException $exception) {
             throw new SkynetQuoteException();
         }
-
     }
 
     public function deliveryETA(array $locations): Response
